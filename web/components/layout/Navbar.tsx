@@ -14,16 +14,9 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState('')
-  const [mounted, setMounted] = useState(false)
+  const [activeSection, setActiveSection] = useState('inicio')
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-
     const handleScroll = () => {
       setScrolled(window.scrollY > 16)
 
@@ -48,7 +41,6 @@ export default function Navbar() {
     }
 
     handleScroll()
-
     window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('resize', handleScroll)
 
@@ -56,48 +48,32 @@ export default function Navbar() {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleScroll)
     }
-  }, [mounted])
+  }, [])
 
   useEffect(() => {
-    if (!mounted) return
-
     const closeOnResize = () => {
       if (window.innerWidth >= 768) setOpen(false)
     }
 
     window.addEventListener('resize', closeOnResize)
-
     return () => window.removeEventListener('resize', closeOnResize)
-  }, [mounted])
-
-  const getLinkClass = (isActive: boolean) =>
-    `rounded-full px-4 py-2 text-sm font-medium transition ${
-      mounted && isActive
-        ? 'bg-slate-900/90 text-white shadow-[0_0_20px_rgba(56,189,248,0.16)]'
-        : 'text-slate-300 hover:bg-slate-900/80 hover:text-white'
-    }`
-
-  const getMobileLinkClass = (isActive: boolean) =>
-    `rounded-2xl px-4 py-3 text-base font-medium transition active:scale-[0.99] ${
-      mounted && isActive
-        ? 'bg-slate-900/90 text-white shadow-[0_0_20px_rgba(56,189,248,0.14)]'
-        : 'text-slate-200 hover:bg-slate-900/80 hover:text-white'
-    }`
+  }, [])
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all ${
-        mounted && scrolled
+      className={`sticky top-0 z-[999] transition-all ${
+        scrolled
           ? 'border-b border-sky-400/10 bg-slate-950/80 backdrop-blur-xl'
           : 'border-b border-transparent bg-transparent'
       }`}
     >
-      <div className="container-page">
+      <div className="container-page relative z-[1000]">
         <div className="flex min-h-20 items-center justify-between gap-4">
           <Link
             href="/"
-            className="group inline-flex items-center gap-3 rounded-full px-2 py-2"
+            className="relative z-[1001] group inline-flex items-center gap-3 rounded-full px-2 py-2"
             aria-label="Ir al inicio"
+            onClick={() => setOpen(false)}
           >
             <span className="flex h-11 w-11 items-center justify-center">
               <svg
@@ -106,7 +82,13 @@ export default function Navbar() {
                 aria-hidden="true"
               >
                 <defs>
-                  <linearGradient id="gradNav" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient
+                    id="gradNav"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
                     <stop offset="0%" stopColor="#0074d9" />
                     <stop offset="100%" stopColor="#00e6b8" />
                   </linearGradient>
@@ -136,9 +118,7 @@ export default function Navbar() {
               <span className="text-sm font-semibold text-slate-50">
                 Sofalor
               </span>
-              <span className="text-xs text-slate-400">
-                Desarrollador Web
-              </span>
+              <span className="text-xs text-slate-400">Desarrollador Web</span>
             </span>
           </Link>
 
@@ -154,8 +134,12 @@ export default function Navbar() {
                   <a
                     key={link.href}
                     href={link.href}
-                    aria-current={mounted && isActive ? 'page' : undefined}
-                    className={getLinkClass(isActive)}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                      isActive
+                        ? 'bg-slate-900/90 text-white shadow-[0_0_20px_rgba(56,189,248,0.16)]'
+                        : 'text-slate-300 hover:bg-slate-900/80 hover:text-white'
+                    }`}
                   >
                     {link.label}
                   </a>
@@ -170,13 +154,16 @@ export default function Navbar() {
 
           <button
             type="button"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-700 bg-slate-900/70 text-slate-100 shadow-[0_0_20px_rgba(2,6,23,0.35)] transition active:scale-95 hover:border-sky-400/30 hover:text-white md:hidden"
+            className="relative z-[1002] inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-700 bg-slate-900/90 text-slate-100 shadow-[0_0_20px_rgba(2,6,23,0.35)] transition active:scale-95 hover:border-sky-400/30 hover:text-white md:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
             onClick={() => setOpen((prev) => !prev)}
           >
-            <span className="sr-only">{open ? 'Cerrar menú' : 'Abrir menú'}</span>
+            <span className="sr-only">
+              {open ? 'Cerrar menú' : 'Abrir menú'}
+            </span>
+
             <svg
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
@@ -207,33 +194,39 @@ export default function Navbar() {
         {open && (
           <nav
             id="mobile-menu"
-            className="glass-card shine-border mb-4 rounded-[1.75rem] p-4 text-center md:hidden"
+            className="absolute left-0 right-0 top-full z-[1001] mx-auto mt-2 w-full px-4 md:hidden"
             aria-label="Menú móvil"
           >
-            <div className="flex flex-col gap-2">
-              {links.map((link) => {
-                const isActive = activeSection === link.id
+            <div className="glass-card shine-border rounded-[1.75rem] p-4 text-center shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+              <div className="flex flex-col gap-2">
+                {links.map((link) => {
+                  const isActive = activeSection === link.id
 
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    aria-current={mounted && isActive ? 'page' : undefined}
-                    className={getMobileLinkClass(isActive)}
-                    onClick={() => setOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                )
-              })}
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={`rounded-2xl px-4 py-3 text-base font-medium transition active:scale-[0.99] ${
+                        isActive
+                          ? 'bg-slate-900/90 text-white shadow-[0_0_20px_rgba(56,189,248,0.14)]'
+                          : 'text-slate-200 hover:bg-slate-900/80 hover:text-white'
+                      }`}
+                      onClick={() => setOpen(false)}
+                    >
+                      {link.label}
+                    </a>
+                  )
+                })}
 
-              <a
-                href="#contacto"
-                className="button-primary mt-2"
-                onClick={() => setOpen(false)}
-              >
-                Hablemos
-              </a>
+                <a
+                  href="#contacto"
+                  className="button-primary mt-2"
+                  onClick={() => setOpen(false)}
+                >
+                  Hablemos
+                </a>
+              </div>
             </div>
           </nav>
         )}
