@@ -5,17 +5,17 @@ export default function Footer() {
 
       <div className="container-page relative">
         <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
-          <div className="max-w-2xl">
-            <div className="flex items-center justify-center gap-3 lg:justify-start">
-              <span className="flex h-11 w-11 items-center justify-center">
+          <div className="flex max-w-2xl flex-col items-center text-center lg:items-start lg:text-left">
+            <div className="flex flex-col items-center gap-3 lg:flex-row lg:items-center lg:justify-start">
+              <span className="flex h-14 w-14 items-center justify-center lg:h-11 lg:w-11">
                 <svg
                   viewBox="0 0 100 100"
-                  className="h-11 w-11 drop-shadow-[0_0_10px_rgba(0,116,217,0.6)] transition-transform duration-300 group-hover:scale-110"
+                  className="h-14 w-14 drop-shadow-[0_0_10px_rgba(0,116,217,0.6)] transition-transform duration-300 lg:h-11 lg:w-11"
                   aria-hidden="true"
                 >
                   <defs>
                     <linearGradient
-                      id="gradNav"
+                      id="gradFooter"
                       x1="0%"
                       y1="0%"
                       x2="100%"
@@ -30,7 +30,7 @@ export default function Footer() {
                     cx="50"
                     cy="50"
                     r="40"
-                    stroke="url(#gradNav)"
+                    stroke="url(#gradFooter)"
                     strokeWidth="8"
                     fill="none"
                   />
@@ -38,23 +38,25 @@ export default function Footer() {
                     cx="50"
                     cy="50"
                     r="25"
-                    stroke="url(#gradNav)"
+                    stroke="url(#gradFooter)"
                     strokeWidth="8"
                     fill="none"
                   />
-                  <circle cx="50" cy="50" r="10" fill="url(#gradNav)" />
+                  <circle cx="50" cy="50" r="10" fill="url(#gradFooter)" />
                 </svg>
               </span>
 
-              <div>
-                <p className="text-sm font-semibold text-white">Sofalor</p>
-                <p className="text-sm text-slate-400">
+              <div className="text-center lg:text-left">
+                <p className="text-base font-semibold text-white lg:text-sm">
+                  Sofalor
+                </p>
+                <p className="mt-1 text-sm leading-6 text-slate-400">
                   Desarrollador web · Diseño moderno · Enfoque profesional
                 </p>
               </div>
             </div>
 
-            <p className="mt-5 text-sm leading-7 text-slate-400">
+            <p className="mt-5 max-w-xl text-center text-sm leading-7 text-slate-400 lg:text-left">
               Portfolio desarrollado con una base moderna y escalable, cuidando
               diseño, usabilidad, accesibilidad y estructura técnica desde el
               inicio.
@@ -63,7 +65,7 @@ export default function Footer() {
 
           <nav
             aria-label="Enlaces legales"
-            className="flex flex-wrap items-center justify-center gap-4 text-sm text-slate-400 lg:justify-end"
+            className="flex flex-col items-center justify-center gap-3 text-sm text-slate-400 sm:flex-row sm:flex-wrap lg:justify-end"
           >
             <a href="/aviso-legal" className="transition hover:text-sky-300">
               Aviso legal
@@ -83,11 +85,10 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-8 border-t border-slate-800/80 pt-6 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} Sofalor. Todos los derechos
-          reservados.
+        <div className="mt-8 border-t border-slate-800/80 pt-6 text-center text-sm leading-6 text-slate-500">
+          © {new Date().getFullYear()} Sofalor. Todos los derechos reservados.
         </div>
       </div>
     </footer>
-  );
+  )
 }

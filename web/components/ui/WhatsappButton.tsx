@@ -1,7 +1,7 @@
 'use client'
 
 export default function WhatsappButton() {
-  const phone = '697315553' // ⚠️ CAMBIA POR TU NÚMERO (sin + ni espacios)
+  const phone = '+34697315553' // ⚠️ CAMBIA POR TU NÚMERO (sin + ni espacios)
   const message = 'Hola Antonio, he visto tu portfolio y quiero hablar contigo'
 
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
