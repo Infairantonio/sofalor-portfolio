@@ -23,7 +23,7 @@ La web debe ser:
 - Frontend: Next.js (App Router)
 - Lenguaje: TypeScript
 - Estilos: Tailwind CSS
-- Animaciones: AOS (Animate On Scroll)
+- Animaciones: Sistema propio con IntersectionObserver (scroll animations)
 - Infraestructura: Docker
 - Control de versiones: Git (rama única `main`)
 - Entorno de desarrollo: Docker Compose
@@ -59,7 +59,7 @@ Motivo:
 
 - Turbopack daba problemas con Docker en Windows
 - Webpack garantiza hot reload correcto
-- Permite acceso desde host (`localhost`)
+- Permite acceso desde host (localhost)
 
 ---
 
@@ -84,7 +84,7 @@ antonio-romero-portfolio/
 │   │   │   ├── Skills.tsx
 │   │   │   └── Contact.tsx
 │   │   └── ui/
-│   │       └── AosInit.tsx
+│   │       └── ScrollAnimations.tsx
 │   ├── package.json
 │   └── ...
 ├── .env
@@ -123,19 +123,21 @@ El diseño está enfocado a transmitir:
 - Layout centrado y limpio
 - Componentes reutilizables
 - Botones optimizados para táctil
-- Feedback visual (`active`, `hover`, `focus`)
-- Scroll suave (`scroll-smooth`)
-- Accesibilidad básica (`aria`, `focus-visible`, skip-link)
+- Feedback visual (active, hover, focus)
+- Scroll suave (scroll-smooth)
+- Accesibilidad básica (aria, focus-visible, skip-link)
 
 ---
 
 ## ✨ Animaciones
 
-Se ha integrado AOS (Animate On Scroll):
+Sistema propio de animaciones por scroll:
 
-- Animaciones al hacer scroll (`fade-up`, `fade-left`, `zoom-in`)
-- Configuración global en `AosInit`
-- Optimizado para rendimiento (`once: true`)
+- Basado en IntersectionObserver
+- Uso de atributos tipo AOS (data-aos="fade-up", etc.)
+- Activación mediante clase .visible
+- Compatible con navegación de Next.js
+- Sin dependencias externas
 
 ---
 
@@ -160,7 +162,7 @@ El proyecto está optimizado para móvil:
 - Botones grandes (mínimo 48px)
 - Espaciado cómodo
 - Eliminación de dependencias de hover
-- Uso de `active` para feedback táctil
+- Uso de active para feedback táctil
 - Componentes adaptados a dedo
 
 ---
@@ -179,7 +181,7 @@ El proyecto está optimizado para móvil:
 - Layout global implementado
 
 ### ✔ Secciones completas
-- Hero (con animaciones AOS)
+- Hero (con animaciones por scroll)
 - About
 - Projects
 - Skills
@@ -221,4 +223,4 @@ Construir una web portfolio profesional lista para:
 ## 🧑‍💻 Autor
 
 Antonio Romero  
-Desarrollador Web Junior
+Desarrollador Web Junior  

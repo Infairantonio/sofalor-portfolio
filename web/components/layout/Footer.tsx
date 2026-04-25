@@ -5,26 +5,59 @@ export default function Footer() {
 
       <div className="container-page relative">
         <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
-          
           <div className="max-w-2xl">
             <div className="flex items-center justify-center gap-3 lg:justify-start">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-sky-400/30 bg-slate-900/80 text-sm font-bold text-sky-300 shadow-[0_0_25px_rgba(56,189,248,0.22)]">
-                AR
+              <span className="flex h-11 w-11 items-center justify-center">
+                <svg
+                  viewBox="0 0 100 100"
+                  className="h-11 w-11 drop-shadow-[0_0_10px_rgba(0,116,217,0.6)] transition-transform duration-300 group-hover:scale-110"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <linearGradient
+                      id="gradNav"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stopColor="#0074d9" />
+                      <stop offset="100%" stopColor="#00e6b8" />
+                    </linearGradient>
+                  </defs>
+
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="40"
+                    stroke="url(#gradNav)"
+                    strokeWidth="8"
+                    fill="none"
+                  />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="25"
+                    stroke="url(#gradNav)"
+                    strokeWidth="8"
+                    fill="none"
+                  />
+                  <circle cx="50" cy="50" r="10" fill="url(#gradNav)" />
+                </svg>
               </span>
 
               <div>
-                <p className="text-sm font-semibold text-white">
-                  Antonio Romero Portfolio
-                </p>
+                <p className="text-sm font-semibold text-white">Sofalor</p>
                 <p className="text-sm text-slate-400">
-                  Desarrollador web junior · Diseño moderno · Enfoque profesional
+                  Desarrollador web · Diseño moderno · Enfoque profesional
                 </p>
               </div>
             </div>
 
             <p className="mt-5 text-sm leading-7 text-slate-400">
               Portfolio desarrollado con una base moderna y escalable, cuidando
-              diseño, usabilidad, accesibilidad y estructura técnica desde el inicio.
+              diseño, usabilidad, accesibilidad y estructura técnica desde el
+              inicio.
             </p>
           </div>
 
@@ -51,9 +84,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 border-t border-slate-800/80 pt-6 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} Antonio Romero. Todos los derechos reservados.
+          © {new Date().getFullYear()} Sofalor. Todos los derechos
+          reservados.
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -30,6 +30,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   min-height: 100vh;
+  position: relative;
+  isolation: isolate;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
@@ -46,7 +48,7 @@ body::before {
   background-size: 34px 34px;
   mask-image: radial-gradient(circle at center, black 35%, transparent 100%);
   opacity: 0.5;
-  z-index: -1;
+  z-index: 0;
 }
 
 body::after {
@@ -59,7 +61,12 @@ body::after {
     radial-gradient(circle at 75% 22%, rgba(37, 99, 235, 0.06), transparent 18%),
     radial-gradient(circle at 55% 75%, rgba(34, 211, 238, 0.04), transparent 18%);
   filter: blur(18px);
-  z-index: -1;
+  z-index: 0;
+}
+
+main {
+  position: relative;
+  z-index: 1;
 }
 
 h1,
@@ -375,6 +382,78 @@ textarea:focus-visible {
   scroll-margin-top: 110px;
 }
 
+/* Animaciones propias tipo AOS, sin librería externa */
+[data-aos] {
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+  animation-delay: 0.12s;
+}
+
+[data-aos="fade-up"] {
+  animation-name: softFadeUp;
+}
+
+[data-aos="fade-left"] {
+  animation-name: softFadeLeft;
+}
+
+[data-aos="fade-right"] {
+  animation-name: softFadeRight;
+}
+
+[data-aos="zoom-in"] {
+  animation-name: softZoomIn;
+}
+
+@keyframes softFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes softFadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes softFadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(-48px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes softZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes floatY {
   0%,
   100% {
@@ -410,4 +489,46 @@ textarea:focus-visible {
     animation: none !important;
     transition: none !important;
   }
+}
+
+[data-aos] {
+  opacity: 0;
+}
+
+[data-aos].visible {
+  opacity: 1;
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9999px;
+
+  background: #25D366;
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(37, 211, 102, 0.4);
+
+  transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-float:active {
+  transform: scale(0.95);
 }

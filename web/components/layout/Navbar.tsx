@@ -14,9 +14,16 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState('inicio')
+  const [activeSection, setActiveSection] = useState('')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 16)
 
@@ -25,36 +32,62 @@ export default function Navbar() {
         .filter(Boolean) as HTMLElement[]
 
       const scrollPosition = window.scrollY + 140
+      let currentSection = 'inicio'
 
       for (const section of sections) {
         const top = section.offsetTop
         const height = section.offsetHeight
 
         if (scrollPosition >= top && scrollPosition < top + height) {
-          setActiveSection(section.id)
+          currentSection = section.id
           break
         }
       }
+
+      setActiveSection(currentSection)
     }
 
     handleScroll()
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
+  }, [mounted])
 
   useEffect(() => {
+    if (!mounted) return
+
     const closeOnResize = () => {
       if (window.innerWidth >= 768) setOpen(false)
     }
 
     window.addEventListener('resize', closeOnResize)
+
     return () => window.removeEventListener('resize', closeOnResize)
-  }, [])
+  }, [mounted])
+
+  const getLinkClass = (isActive: boolean) =>
+    `rounded-full px-4 py-2 text-sm font-medium transition ${
+      mounted && isActive
+        ? 'bg-slate-900/90 text-white shadow-[0_0_20px_rgba(56,189,248,0.16)]'
+        : 'text-slate-300 hover:bg-slate-900/80 hover:text-white'
+    }`
+
+  const getMobileLinkClass = (isActive: boolean) =>
+    `rounded-2xl px-4 py-3 text-base font-medium transition active:scale-[0.99] ${
+      mounted && isActive
+        ? 'bg-slate-900/90 text-white shadow-[0_0_20px_rgba(56,189,248,0.14)]'
+        : 'text-slate-200 hover:bg-slate-900/80 hover:text-white'
+    }`
 
   return (
     <header
       className={`sticky top-0 z-50 transition-all ${
-        scrolled
+        mounted && scrolled
           ? 'border-b border-sky-400/10 bg-slate-950/80 backdrop-blur-xl'
           : 'border-b border-transparent bg-transparent'
       }`}
@@ -101,10 +134,10 @@ export default function Navbar() {
 
             <span className="flex flex-col text-left">
               <span className="text-sm font-semibold text-slate-50">
-                Antonio Romero
+                Sofalor
               </span>
               <span className="text-xs text-slate-400">
-                Desarrollador Web Junior
+                Desarrollador Web
               </span>
             </span>
           </Link>
@@ -121,12 +154,8 @@ export default function Navbar() {
                   <a
                     key={link.href}
                     href={link.href}
-                    aria-current={isActive ? 'page' : undefined}
-                    className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                      isActive
-                        ? 'bg-slate-900/90 text-white shadow-[0_0_20px_rgba(56,189,248,0.16)]'
-                        : 'text-slate-300 hover:bg-slate-900/80 hover:text-white'
-                    }`}
+                    aria-current={mounted && isActive ? 'page' : undefined}
+                    className={getLinkClass(isActive)}
                   >
                     {link.label}
                   </a>
@@ -189,12 +218,8 @@ export default function Navbar() {
                   <a
                     key={link.href}
                     href={link.href}
-                    aria-current={isActive ? 'page' : undefined}
-                    className={`rounded-2xl px-4 py-3 text-base font-medium transition active:scale-[0.99] ${
-                      isActive
-                        ? 'bg-slate-900/90 text-white shadow-[0_0_20px_rgba(56,189,248,0.14)]'
-                        : 'text-slate-200 hover:bg-slate-900/80 hover:text-white'
-                    }`}
+                    aria-current={mounted && isActive ? 'page' : undefined}
+                    className={getMobileLinkClass(isActive)}
                     onClick={() => setOpen(false)}
                   >
                     {link.label}

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
-import AosInit from '@/components/ui/AosInit'
+import ScrollAnimations from '@/components/ui/ScrollAnimations'
+import WhatsappButton from '@/components/ui/WhatsappButton'
 import './globals.css'
 
 const inter = Inter({
@@ -16,14 +17,15 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://antonioromero.dev'),
+  metadataBase: new URL('https://sofalor.es'),
   title: {
-    default: 'Antonio Romero | Desarrollador Web Junior',
-    template: '%s | Antonio Romero',
+    default: 'Sofalor | Portfolio de Antonio Romero',
+    template: '%s | Sofalor',
   },
   description:
-    'Portfolio profesional de Antonio Romero, desarrollador web junior. Proyectos reales, diseño moderno, frontend, backend y desarrollo web con enfoque profesional.',
+    'Sofalor, portfolio profesional de Antonio Romero, desarrollador web junior. Proyectos reales, diseño moderno, frontend, backend y desarrollo web con enfoque profesional.',
   keywords: [
+    'Sofalor',
     'Antonio Romero',
     'portfolio desarrollador web',
     'desarrollador web junior',
@@ -36,23 +38,24 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Antonio Romero' }],
   creator: 'Antonio Romero',
-  applicationName: 'Antonio Romero Portfolio',
+  applicationName: 'Sofalor',
   category: 'technology',
+  manifest: '/site.webmanifest',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Antonio Romero | Desarrollador Web Junior',
+    title: 'Sofalor | Portfolio de Antonio Romero',
     description:
       'Portfolio profesional moderno de Antonio Romero. Proyectos reales, diseño impactante y enfoque profesional.',
-    url: 'https://antonioromero.dev',
-    siteName: 'Antonio Romero Portfolio',
+    url: 'https://sofalor.es',
+    siteName: 'Sofalor',
     locale: 'es_ES',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Antonio Romero | Desarrollador Web Junior',
+    title: 'Sofalor | Portfolio de Antonio Romero',
     description:
       'Portfolio profesional moderno de Antonio Romero. Proyectos reales, diseño impactante y enfoque profesional.',
   },
@@ -69,8 +72,21 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
+    icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      {
+        url: '/android-chrome-192x192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        url: '/android-chrome-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
+    shortcut: '/favicon-32x32.png',
     apple: '/apple-touch-icon.png',
   },
 }
@@ -91,13 +107,17 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} bg-slate-950 text-slate-100 antialiased`}
       >
-        <AosInit />
+        <ScrollAnimations />
 
         <a href="#contenido" className="skip-link">
           Saltar al contenido principal
         </a>
 
-        {children}
+        <main id="contenido" tabIndex={-1}>
+          {children}
+        </main>
+
+        <WhatsappButton />
       </body>
     </html>
   )

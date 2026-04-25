@@ -4,8 +4,8 @@ const projects = [
     description:
       'Proyecto web orientado a descubrir lugares, rutas y experiencias. Enfoque visual, utilidad real y arquitectura preparada para crecer.',
     stack: ['React', 'Node.js', 'MongoDB', 'Docker'],
-    liveUrl: '#',
-    repoUrl: '#',
+    liveUrl: 'https://www.explorahuelva.es',
+    repoUrl: 'https://github.com/Infairantonio',
     featured: true,
     type: 'Proyecto destacado',
   },
@@ -14,20 +14,10 @@ const projects = [
     description:
       'Web profesional con fotobook, panel de administración y diseño editorial orientado a imagen de marca personal.',
     stack: ['React', 'Express', 'PostgreSQL', 'JWT'],
-    liveUrl: '#',
-    repoUrl: '#',
+    liveUrl: 'https://www.rafaromeroactor.es',
+    repoUrl: 'https://github.com/Infairantonio',
     featured: false,
     type: 'Portfolio profesional',
-  },
-  {
-    title: 'Blog / API / Laravel',
-    description:
-      'Distintos proyectos de aprendizaje real con CRUD, autenticación, paneles, roles, subida de imágenes y diseño responsive.',
-    stack: ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
-    liveUrl: '#',
-    repoUrl: '#',
-    featured: false,
-    type: 'Proyecto académico real',
   },
 ]
 
@@ -62,7 +52,7 @@ export default function Projects() {
           {projects.map((project, index) => (
             <article
               key={project.title}
-              data-aos="zoom-in-up"
+              data-aos="zoom-in"
               data-aos-delay={index * 100}
               className={`project-card glass-card shine-border group rounded-[2rem] p-6 text-center transition-transform active:scale-[0.995] sm:text-left ${
                 project.featured ? 'lg:col-span-2' : ''
@@ -104,18 +94,20 @@ export default function Projects() {
               <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-start">
                 <a
                   href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="button-primary w-full sm:w-auto"
-                  aria-label={`Ver proyecto ${project.title}`}
                 >
                   Ver proyecto
                 </a>
 
                 <a
                   href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="button-secondary w-full sm:w-auto"
-                  aria-label={`Ver código de ${project.title}`}
                 >
-                  Ver código
+                  Ver código ↗
                 </a>
               </div>
 

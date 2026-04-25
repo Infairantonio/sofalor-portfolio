@@ -19,7 +19,7 @@ export default function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
           <div className="text-center lg:text-left" data-aos="fade-up">
             <div className="flex justify-center lg:justify-start">
-              <p className="section-kicker">Portfolio 2026</p>
+              <p className="section-kicker">Portfolio</p>
             </div>
 
             <h1
@@ -33,7 +33,7 @@ export default function Hero() {
             </h1>
 
             <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg lg:mx-0">
-              Soy Antonio Romero, desarrollador web junior. Me centro en crear
+              Soy Antonio José Romero, desarrollador web  Me centro en crear
               interfaces modernas, visuales y bien construidas, con especial
               atención a la usabilidad, la accesibilidad, el rendimiento y una
               presencia profesional real.
