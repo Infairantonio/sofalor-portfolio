@@ -18,47 +18,55 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://sofalor.es'),
+
   title: {
-    default: 'Sofalor | Portfolio de Antonio Romero',
+    default: 'Desarrollador Web en Huelva | Antonio Romero',
     template: '%s | Sofalor',
   },
+
   description:
-    'Sofalor, portfolio profesional de Antonio Romero, desarrollador web junior. Proyectos reales, diseño moderno, frontend, backend y desarrollo web con enfoque profesional.',
+    'Desarrollador web en Huelva. Portfolio profesional de Antonio Romero con proyectos reales, diseño moderno y desarrollo web frontend y backend.',
+
   keywords: [
-    'Sofalor',
-    'Antonio Romero',
+    'desarrollador web Huelva',
+    'programador web Huelva',
+    'crear pagina web Huelva',
+    'Antonio Romero desarrollador',
     'portfolio desarrollador web',
-    'desarrollador web junior',
     'Next.js portfolio',
     'frontend',
     'backend',
-    'desarrollador full stack junior',
-    'portfolio moderno',
-    'programador web',
+    'desarrollador full stack',
   ],
+
   authors: [{ name: 'Antonio Romero' }],
   creator: 'Antonio Romero',
   applicationName: 'Sofalor',
   category: 'technology',
+
   manifest: '/site.webmanifest',
+
   alternates: {
     canonical: '/',
   },
+
   openGraph: {
-    title: 'Sofalor | Portfolio de Antonio Romero',
+    title: 'Desarrollador Web en Huelva | Antonio Romero',
     description:
-      'Portfolio profesional moderno de Antonio Romero. Proyectos reales, diseño impactante y enfoque profesional.',
+      'Portfolio profesional moderno de desarrollador web en Huelva. Proyectos reales, diseño impactante y enfoque profesional.',
     url: 'https://sofalor.es',
     siteName: 'Sofalor',
     locale: 'es_ES',
     type: 'website',
   },
+
   twitter: {
     card: 'summary_large_image',
-    title: 'Sofalor | Portfolio de Antonio Romero',
+    title: 'Desarrollador Web en Huelva | Antonio Romero',
     description:
-      'Portfolio profesional moderno de Antonio Romero. Proyectos reales, diseño impactante y enfoque profesional.',
+      'Portfolio profesional moderno de desarrollador web en Huelva. Proyectos reales y diseño moderno.',
   },
+
   robots: {
     index: true,
     follow: true,
@@ -71,6 +79,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+
   icons: {
     icon: [
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -99,15 +108,21 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="es" className="scroll-smooth">
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} bg-slate-950 text-slate-100 antialiased`}
       >
         <ScrollAnimations />
+
+        {/* SEO LOCAL INVISIBLE */}
+        <div className="hidden">
+          Desarrollador web en Huelva especializado en páginas modernas,
+          rápidas y optimizadas para negocios y proyectos digitales en España.
+        </div>
 
         <a href="#contenido" className="skip-link">
           Saltar al contenido principal
